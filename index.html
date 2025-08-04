@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Netzeal IT Services</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: #ecf0f1;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23ffffff" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header h1 {
+            font-size: 3.5em;
+            margin-bottom: 10px;
+            animation: fadeInUp 1s ease;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.3s both;
+        }
+        
+        .logo {
+            font-size: 2em;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+        
+        .header-graphics {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+        
+        .moving-orb {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(46, 204, 113, 0.8), rgba(39, 174, 96, 0.4));
+            box-shadow: 0 0 30px rgba(46, 204, 113, 0.6), inset 0 0 20px rgba(255,255,255,0.2);
+            animation: float-orb 15s infinite ease-in-out;
+        }
+        
+        .orb-1 {
+            width: 60px;
+            height: 60px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .orb-2 {
+            width: 40px;
+            height: 40px;
+            top: 60%;
+            right: 15%;
+            animation-delay: -5s;
+        }
+        
+        .orb-3 {
+            width: 80px;
+            height: 80px;
+            top: 30%;
+            right: 20%;
+            animation-delay: -10s;
+        }
+        
+        .circuit-lines {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            opacity: 0.3;
+            animation: rotate-circuit 20s linear infinite;
+        }
+        
+        .services-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, #1c1c1c 0%, #2e2e2e 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .services-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(2px 2px at 20px 30px, #ffffff, transparent),
+                radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.8), transparent),
+                radial-gradient(1px 1px at 90px 40px, #ffffff, transparent),
+                radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.6), transparent),
+                radial-gradient(2px 2px at 160px 30px, #ffffff, transparent),
+                linear-gradient(135deg, #1c1c1c 0%, #2e2e2e 100%);
+            z-index: 0;
+        }
+        
+        .floating-shapes {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+        
+        .shape {
+            position: absolute;
+            background: radial-gradient(circle, rgba(255,255,255,0.8), rgba(255,255,255,0.1));
+            border-radius: 50%;
+            animation: float-shapes 20s infinite linear;
+            box-shadow: 0 0 20px rgba(255,255,255,0.3), inset 0 0 20px rgba(255,255,255,0.1);
+        }
+        
+        .shape:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            left: 10%;
+            animation-delay: 0s;
+        }
+        
+        .shape:nth-child(2) {
+            width: 60px;
+            height: 60px;
+            left: 80%;
+            animation-delay: -5s;
+        }
+        
+        .shape:nth-child(3) {
+            width: 100px;
+            height: 100px;
+            left: 50%;
+            animation-delay: -10s;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            font-size: 2.5em;
+            color: #ecf0f1;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(45deg, #2ecc71, #27ae60);
+            border-radius: 2px;
+        }
+        
+        .services {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 25px;
+            justify-items: center;
+        }
+        
+        .service {
+            background: linear-gradient(135deg, rgba(52, 73, 94, 0.85) 0%, rgba(44, 62, 80, 0.85) 100%);
+            color: white;
+            padding: 30px 15px;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3), 0 0 15px rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            width: 95%;
+            min-height: 250px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            z-index: 1;
+            backdrop-filter: blur(10px);
+        }
+        
+        .service-content {
+            position: relative;
+            z-index: 3;
+            transition: all 0.3s ease;
+        }
+        
+        
+        .service::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
+            transform: rotate(45deg);
+            transition: all 0.5s;
+            opacity: 0;
+            z-index: 4;
+        }
+        
+        .service:hover::before {
+            animation: shine 0.8s ease-in-out;
+        }
+        
+        .service:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 30px rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.4);
+        }
+        
+        .service-icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .service h2 {
+            font-size: 1.2em;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        
+        .service p {
+            font-size: 0.85em;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+        
+        .footer {
+            padding: 20px 0;
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: #ecf0f1;
+            text-align: center;
+            position: relative;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 -5px 10px rgba(0,0,0,0.5);
+        }
+        
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: center;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+
+        .footer-logo {
+            font-size: 1.8em;
+            margin-bottom: 3px;
+            animation: bounce 2s infinite;
+        }
+
+        .footer-logo i {
+            color: #2ecc71;
+        }
+
+        .footer-text {
+            max-width: 500px;
+            line-height: 1.4;
+            opacity: 0.8;
+            font-size: 0.9em;
+        }
+
+        .footer a {
+            color: #ecf0f1;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer a:hover {
+            color: #2ecc71;
+        }
+        
+        .social-links a {
+            color: #ecf0f1;
+            font-size: 1.3em;
+            text-decoration: none;
+            transition: all 0.3s;
+            padding: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .social-links a:hover {
+            color: #2ecc71;
+            transform: translateY(-3px) scale(1.1);
+            background: rgba(46, 204, 113, 0.2);
+        }
+        
+        .email-link {
+            color: #2ecc71;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .email-link:hover {
+            color: #27ae60;
+            text-decoration: underline;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        @keyframes shine {
+            0% {
+                opacity: 0;
+                transform: rotate(45deg) translateX(-100%);
+            }
+            50% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: rotate(45deg) translateX(100%);
+            }
+        }
+        
+        @keyframes float-shapes {
+            0%, 100% {
+                transform: translateY(-100vh) rotate(0deg);
+            }
+            50% {
+                transform: translateY(calc(100vh + 100px)) rotate(180deg);
+            }
+        }
+        
+        @keyframes float-orb {
+            0%, 100% {
+                transform: translateY(0px) translateX(0px);
+            }
+            25% {
+                transform: translateY(-20px) translateX(15px);
+            }
+            50% {
+                transform: translateY(-10px) translateX(-10px);
+            }
+            75% {
+                transform: translateY(-30px) translateX(20px);
+            }
+        }
+        
+        @keyframes rotate-circuit {
+            0% {
+                transform: translate(-50%, -50%) rotate(0deg);
+            }
+            100% {
+                transform: translate(-50%, -50%) rotate(360deg);
+            }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .services {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (max-width: 1000px) {
+            .services {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .services {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 20px;
+            }
+            
+            .header h1 {
+                font-size: 2.5em;
+            }
+            
+            .section-title {
+                font-size: 2em;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .services {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .social-links {
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-graphics">
+            <div class="moving-orb orb-1"></div>
+            <div class="moving-orb orb-2"></div>
+            <div class="moving-orb orb-3"></div>
+            <div class="circuit-lines">
+                <svg width="200" height="200" viewBox="0 0 200 200">
+                    <circle cx="100" cy="100" r="80" fill="none" stroke="#2ecc71" stroke-width="2" opacity="0.6"/>
+                    <circle cx="100" cy="100" r="60" fill="none" stroke="#27ae60" stroke-width="1" opacity="0.4"/>
+                    <circle cx="100" cy="100" r="40" fill="none" stroke="#2ecc71" stroke-width="1" opacity="0.3"/>
+                    <line x1="100" y1="20" x2="100" y2="40" stroke="#2ecc71" stroke-width="2" opacity="0.5"/>
+                    <line x1="100" y1="160" x2="100" y2="180" stroke="#2ecc71" stroke-width="2" opacity="0.5"/>
+                    <line x1="20" y1="100" x2="40" y2="100" stroke="#27ae60" stroke-width="2" opacity="0.5"/>
+                    <line x1="160" y1="100" x2="180" y2="100" stroke="#27ae60" stroke-width="2" opacity="0.5"/>
+                    <circle cx="100" cy="40" r="3" fill="#2ecc71" opacity="0.8"/>
+                    <circle cx="100" cy="160" r="3" fill="#2ecc71" opacity="0.8"/>
+                    <circle cx="40" cy="100" r="3" fill="#27ae60" opacity="0.8"/>
+                    <circle cx="160" cy="100" r="3" fill="#27ae60" opacity="0.8"/>
+                </svg>
+            </div>
+        </div>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h1>Welcome to Netzeal</h1>
+                <p>Your partners in IT excellence</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="services-section">
+        <div class="floating-shapes">
+            <div class="shape"></div>
+            <div class="shape"></div>
+            <div class="shape"></div>
+        </div>
+        <div class="container">
+            <h2 class="section-title">Our Services</h2>
+            <div class="services">
+                <div class="service" data-service="data-analysis">
+                    <div class="service-content">
+                        <div class="service-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h2>Data Analysis and Visualization</h2>
+                        <p>Transform data into actionable insights with advanced analytics and stunning visualizations.</p>
+                    </div>
+                </div>
+                <div class="service" data-service="web-development">
+                    <div class="service-content">
+                        <div class="service-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h2>Web Development</h2>
+                        <p>Create robust and scalable web applications using cutting-edge technologies.</p>
+                    </div>
+                </div>
+                <div class="service" data-service="ai-ml">
+                    <div class="service-content">
+                        <div class="service-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h2>AI/ML</h2>
+                        <p>Integrate AI/ML solutions to enhance decision-making and automate processes.</p>
+                    </div>
+                </div>
+                <div class="service" data-service="graphic-design">
+                    <div class="service-content">
+                        <div class="service-icon">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <h2>Graphic Designing</h2>
+                        <p>Visual storytelling through innovative design that captures your brand essence.</p>
+                    </div>
+                </div>
+                <div class="service" data-service="digital-marketing">
+                    <div class="service-content">
+                        <div class="service-icon">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                        <h2>Digital Marketing</h2>
+                        <p>Reach and engage your audience effectively with data-driven marketing strategies.</p>
+                    </div>
+                </div>
+                <div class="service" data-service="film-making">
+                    <div class="service-content">
+                        <div class="service-icon">
+                            <i class="fas fa-film"></i>
+                        </div>
+                        <h2>Film Making and Creative Media</h2>
+                        <p>Bring your stories to life with professional video production and creative media solutions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <h2 style="font-size: 1.4em; margin-bottom: 5px;">Netzeal</h2>
+                <p class="footer-text">Transforming your digital vision into reality with cutting-edge technology and innovative solutions.</p>
+                <p style="font-size: 0.9em;">Contact: <a href="mailto:yuktihub@gmail.com" class="email-link">yuktihub@gmail.com</a></p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/netzeal.in/profilecard/?igsh=MThsazVob2xrcWpz" target="_blank" title="Instagram">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                    <a href="https://www.facebook.com/share/16gZkTt3Jp/" target="_blank" title="Facebook">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="https://x.com/NetZeal_com" target="_blank" title="X (Twitter)">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="https://youtube.com/@netzeal_in?si=_dllL0f_3ud1SNw1" target="_blank" title="YouTube">
+                        <i class="fab fa-youtube"></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/netzeal-in-17a779378/" target="_blank" title="LinkedIn">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                </div>
+                <div style="margin-top: 10px; padding-top: 8px; border-top: 1px solid rgba(255,255,255,0.2);">
+                    <p style="opacity: 0.6; font-size: 0.75em;">&copy; 2024 Netzeal. All rights reserved.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add some interactive features
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate services on scroll
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationDelay = Math.random() * 0.5 + 's';
+                        entry.target.classList.add('animate-in');
+                    }
+                });
+            }, observerOptions);
+            
+            document.querySelectorAll('.service').forEach(service => {
+                observer.observe(service);
+            });
+            
+            // Add click animations to service cards
+            document.querySelectorAll('.service').forEach(service => {
+                service.addEventListener('click', function() {
+                    this.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
+
